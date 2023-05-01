@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800;900&display=swap");
+
+/* Common styles */
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: "Kanit", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.container {
+  height: 100vh;
+  background-color: #7a7a5f;
+  display: grid;
+  grid-template-rows: 12rem 1fr;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 3fr repeat(2, 2fr) 12rem;
+  border-bottom: 0.1rem solid #fff;
+}
+
+.logo {
+  background-color: #eb8f8f;
+}
+
+.navbar a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-inline: 2rem;
+  border-right: 0.1rem solid #fff;
+}
+
+.navbar i {
+  font-size: 7rem;
+}
+
+.navbar span {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  transition: left 0.5s;
+}
+
+.nav-link:hover::before {
+  left: 0;
+}
+
+.nav-link > * {
+  z-index: 1;
+  transition: color 0.5s;
+}
+
+.nav-link:hover > * {
+  color: #333;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 0;
+  cursor: pointer;
+  transition: background-color 0.5s, gap 0.2s 0.3s;
+}
+
+.change.hamburger-menu {
+  gap: 0;
+  transition: background-color 0.5s, gap 0.2s;
+}
+
+.hamburger-menu:hover {
+  background-color: #fff;
+}
+
+.hamburger-menu::before,
+.hamburger-menu::after {
+  content: "";
+  width: 4rem;
+  height: 0.1rem;
+  display: block;
+  background-color: #fff;
+  transition: background-color 0.5s;
+}
+
+.change.hamburger-menu::before {
+  transform: rotate(-45deg);
+}
+
+.change.hamburger-menu::after {
+  transform: rotate(45deg);
+}
+
+.hamburger-menu:hover::before,
+.hamburger-menu:hover::after {
+  background-color: #333;
+  transition: background-color 0.5s, transform 0.5s;
+}
+/* End of Hamburger Menu */
+/* End of Navbar */
+
+/* Landing */
+.landing {
+  position: relative;
+}
+
+/* Car animation */
+.car {
+  position: absolute;
+  top: 40%;
+  left: -50%;
+  transform: translateX(-100%) scale(1.4);
+  animation: carAnim 5s forwards;
+}
+
+@keyframes carAnim {
+  0% {
+    left: -50%;
+    transform: translateX(-100%) scale(1.4);
+  }
+  60%,
+  85% {
+    left: 50%;
+    transform: translateX(-50%) scale(1.4) rotate(0);
+  }
+  100% {
+    left: 50%;
+    transform: translateX(-50%) scale(1.2) rotate(-45deg);
+  }
+}
+/* End of Car animation */
+
+/* Landing text animation */
+.landing-text {
+  height: 100%;
+  padding-inline: 5rem;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.landing-text > span {
+  position: relative;
+}
+
+.landing span span {
+  height: 100%;
+  font-size: 13rem;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.3rem #777;
+  position: absolute;
+  left: 50%;
+  transform: scale(0) translateX(-50%);
+  width: max-content;
+  transform-origin: bottom;
+  animation: landingTextAnim 2s 3s forwards;
+}
+
+@keyframes landingTextAnim {
+  0% {
+    transform: scale(0) translateX(-50%) rotate(40deg);
+  }
+  30%,
+  60% {
+    left: 50%;
+    transform: scale(1) translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(calc(var(--direction) * -1));
+    left: var(--direction);
+  }
+}
+/* End of Landing text animation */
+
+/* Navigation */
+.navigation {
+  position: absolute;
+  inset: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem 0;
+  padding: 10rem 30rem;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.navigation.change {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.navigation a {
+  position: relative;
+}
+
+.navigation a:nth-child(even) {
+  align-self: flex-start;
+}
+
+.navigation a:nth-child(odd) {
+  align-self: flex-end;
+}
+
+.navigation span {
+  position: relative;
+  z-index: 10;
+}
+
+.navigation span:nth-child(1) {
+  color: #333;
+  font-size: 2rem;
+  margin-right: 2rem;
+}
+
+.navigation span:nth-child(2) {
+  color: #eb8f8f;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.navigation img {
+  width: 30rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  filter: grayscale(100%);
+  opacity: 0;
+}
+
+.navigation a:hover img {
+  opacity: 0.8;
+  transform: opacity 0.4s;
+}
+/* End of Navigation */
+
+/* Responsive */
+@media (max-width: 1600px) {
+  .car {
+    width: 65rem;
+  }
+}
+
+@media (max-width: 1300px) {
+  .car {
+    width: 60rem;
+  }
+
+  .landing span span {
+    font-size: 10rem;
+  }
+
+  .navigation {
+    padding: 10rem;
+    overflow: hidden;
+  }
+
+  .navigation span:nth-child(2) {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-rows: 10rem 1fr;
+  }
+
+  .navbar {
+    grid-template-columns: 3fr repeat(2, 2fr) 10rem;
+  }
+
+  .navbar a {
+    gap: 0.5rem;
+    padding-inline: 1rem;
+  }
+
+  .navbar i {
+    font-size: 4rem;
+  }
+
+  .navbar span {
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+
+  .car {
+    width: 45rem;
+  }
+
+  .landing-text {
+    padding-inline: 2rem;
+  }
+
+  .landing span span {
+    font-size: 8rem;
+  }
+
+  .navigation span:nth-child(2) {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-link i {
+    display: none;
+  }
+
+  .car {
+    width: 35rem;
+  }
+
+  .landing span span {
+    font-size: 6.5rem;
+  }
+
+  .navigation {
+    padding: 5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    grid-template-columns: 3fr repeat(2, 2fr) 6rem;
+  }
+
+  .navbar span {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .car {
+    width: 25rem;
+  }
+
+  .landing span span {
+    font-size: 5rem;
+  }
+
+  .navigation span:nth-child(1) {
+    font-size: 1.4rem;
+  }
+
+  .navigation span:nth-child(2) {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  html {
+    font-size: 50%;
+  }
+
+  .navigation {
+    padding: 3rem;
+  }
+}
+/* End of Responsive */
